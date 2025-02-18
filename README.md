@@ -1,6 +1,4 @@
-\`\`\`markdown
-
-# Simple YouTube Downloader GUI
+# YouTube Downloader GUI
 
 This is a simple Python-based graphical user interface (GUI) application that allows you to download videos and audio from YouTube. It uses the powerful `yt-dlp` library to handle the downloading process and `tkinter` for the user interface.
 
@@ -46,7 +44,7 @@ Before running this program, you need to have the following installed on your sy
       * **How to install FFmpeg**:
         The installation process for FFmpeg varies depending on your operating system:
 
-          * **Windows**:
+          * **For Windows**:
 
             1.  Go to the FFmpeg website or a reliable source like [https://www.ffmpeg.org/download.html](https://www.google.com/url?sa=E&source=gmail&q=https://www.ffmpeg.org/download.html) to download FFmpeg binaries for Windows.
             2.  Download the `ffmpeg` release for Windows (usually a `.zip` file).
@@ -59,45 +57,7 @@ Before running this program, you need to have the following installed on your sy
                   * Click "OK" on all dialogs to save changes.
             5.  Restart your command prompt or terminal for the changes to take effect.
 
-          * **macOS**:
-            You can use package managers like Homebrew or MacPorts to install FFmpeg. If you have Homebrew installed, open Terminal and run:
-
-            ```bash
-            brew install ffmpeg
-            ```
-
-            If you use MacPorts:
-
-            ```bash
-            sudo port install ffmpeg
-            ```
-
-          * **Linux (Ubuntu, Debian, etc.)**:
-            You can usually install FFmpeg using your distribution's package manager. For Ubuntu and Debian-based systems, open Terminal and run:
-
-            ```bash
-            sudo apt update
-            sudo apt install ffmpeg
-            ```
-
-            For Fedora, CentOS, and RHEL-based systems:
-
-            ```bash
-            sudo yum install ffmpeg
-            ```
-
-            or
-
-            ```bash
-            sudo dnf install ffmpeg
-            ```
-
-            For Arch Linux:
-
-            ```bash
-            sudo pacman -S ffmpeg
-            ```
-
+         
         **After installation, verify FFmpeg is installed correctly.** Open your terminal or command prompt and type:
 
         ```bash
@@ -142,6 +102,3 @@ This program is provided for educational purposes only. Downloading copyrighted 
 -----
 
 Enjoy downloading your favorite YouTube content responsibly\!
-
-```
-```
