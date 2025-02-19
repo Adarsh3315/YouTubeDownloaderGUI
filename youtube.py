@@ -58,9 +58,6 @@ def download_youtube(url, mode, file_format, output_folder):
                 "merge_output_format": "mp4",
                 "logger": logger,
                 "progress_hooks": [progress_hook],
-                "postprocessors": [
-                    {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
-                ],
             }
     else: 
         if file_format == "Audio":
@@ -86,9 +83,6 @@ def download_youtube(url, mode, file_format, output_folder):
                 "merge_output_format": "mp4",
                 "logger": logger,
                 "progress_hooks": [progress_hook],
-                "postprocessors": [
-                    {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
-                ],
             }
 
     try:
