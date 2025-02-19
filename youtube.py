@@ -52,12 +52,18 @@ def download_youtube(url, mode, file_format, output_folder):
             }
         else:  
             ydl_opts = {
-                "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]",
+                "format": "bestvideo+bestaudio/best",
                 "outtmpl": outtmpl,
                 "ignoreerrors": True,
                 "merge_output_format": "mp4",
                 "logger": logger,
                 "progress_hooks": [progress_hook],
+                "postprocessors": [
+                    {
+                        "key": "FFmpegVideoRemuxer",
+                        "when": "post_process"
+                    }
+                ],
             }
     else: 
         if file_format == "Audio":
@@ -77,12 +83,18 @@ def download_youtube(url, mode, file_format, output_folder):
             }
         else: 
             ydl_opts = {
-                "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]",
+                "format": "bestvideo+bestaudio/best",
                 "outtmpl": outtmpl,
                 "ignoreerrors": True,
                 "merge_output_format": "mp4",
                 "logger": logger,
                 "progress_hooks": [progress_hook],
+                "postprocessors": [
+                    {
+                        "key": "FFmpegVideoRemuxer",
+                        "when": "post_process"
+                    }
+                ],
             }
 
     try:
