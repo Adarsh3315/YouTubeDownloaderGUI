@@ -9,6 +9,7 @@ import glob
 def download_youtube(url, mode, file_format, output_folder):
     logs = []
 
+    # Simple logger for Streamlit
     class StreamlitLogger:
         def debug(self, msg):
             logs.append(f"DEBUG: {msg}")
@@ -52,14 +53,18 @@ def download_youtube(url, mode, file_format, output_folder):
             }
         else:  # MP4
             ydl_opts = {
-                "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]",
+                # Merge best audio + best video
+                "format": "bestvideo+bestaudio/best",
                 "outtmpl": outtmpl,
                 "ignoreerrors": True,
-                "merge_output_format": "mp4",
                 "logger": logger,
                 "progress_hooks": [progress_hook],
+                # Remux final output into MP4
                 "postprocessors": [
-                    {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
+                    {
+                        "key": "FFmpegVideoRemuxer",
+                        "preferredformat": "mp4"
+                    }
                 ],
             }
     else:  # single download
@@ -80,14 +85,18 @@ def download_youtube(url, mode, file_format, output_folder):
             }
         else:  # Video
             ydl_opts = {
-                "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]",
+                # Merge best audio + best video
+                "format": "bestvideo+bestaudio/best",
                 "outtmpl": outtmpl,
                 "ignoreerrors": True,
-                "merge_output_format": "mp4",
                 "logger": logger,
                 "progress_hooks": [progress_hook],
+                # Remux final output into MP4
                 "postprocessors": [
-                    {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
+                    {
+                        "key": "FFmpegVideoRemuxer",
+                        "preferredformat": "mp4"
+                    }
                 ],
             }
 
@@ -103,7 +112,7 @@ def download_youtube(url, mode, file_format, output_folder):
 
 def main():
     st.title("YouTube Downloader (Streamlit Version)")
-    st.warning("Educational use only. Respect copyrights.")
+    st.warning("This application is for educational purposes only. Only download if you have the rights to the content.")
 
     url = st.text_input("YouTube URL")
     mode = st.radio("Download Mode", ("playlist", "single"))
@@ -122,7 +131,7 @@ def main():
                 logs = download_youtube(url, mode, file_format, output_folder)
             st.write("\n".join(logs))
 
-            # Offer download buttons for any files created
+            # Provide download buttons for new files
             downloaded_files = glob.glob(os.path.join(output_folder, "*"))
             for file_path in downloaded_files:
                 file_name = os.path.basename(file_path)
