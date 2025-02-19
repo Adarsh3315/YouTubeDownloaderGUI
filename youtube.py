@@ -36,6 +36,7 @@ def download_youtube(url, mode, file_format, output_folder):
 
     if mode == "playlist":
         if file_format == "MP3":
+            # Audio-only playlist
             ydl_opts = {
                 "format": "bestaudio/best",
                 "outtmpl": outtmpl,
@@ -51,22 +52,25 @@ def download_youtube(url, mode, file_format, output_folder):
                 "progress_hooks": [progress_hook],
             }
         else:  
+            # Video playlist, remux to MKV
             ydl_opts = {
                 "format": "bestvideo+bestaudio/best",
                 "outtmpl": outtmpl,
                 "ignoreerrors": True,
-                "merge_output_format": "mp4",
                 "logger": logger,
                 "progress_hooks": [progress_hook],
+                # Remux final output into MKV 
                 "postprocessors": [
                     {
                         "key": "FFmpegVideoRemuxer",
-                        "when": "post_process"
+                        "when": "post_process",
+                        "preferedformat": "mkv"
                     }
                 ],
             }
-    else: 
+    else:
         if file_format == "Audio":
+            # Single audio download
             ydl_opts = {
                 "format": "bestaudio/best",
                 "outtmpl": outtmpl,
@@ -81,18 +85,19 @@ def download_youtube(url, mode, file_format, output_folder):
                 "logger": logger,
                 "progress_hooks": [progress_hook],
             }
-        else: 
+        else:
+            # Single video download, remux to MKV
             ydl_opts = {
                 "format": "bestvideo+bestaudio/best",
                 "outtmpl": outtmpl,
                 "ignoreerrors": True,
-                "merge_output_format": "mp4",
                 "logger": logger,
                 "progress_hooks": [progress_hook],
                 "postprocessors": [
                     {
                         "key": "FFmpegVideoRemuxer",
-                        "when": "post_process"
+                        "when": "post_process",
+                        "preferedformat": "mkv"
                     }
                 ],
             }
