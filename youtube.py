@@ -36,6 +36,7 @@ def download_youtube(url, mode, file_format, output_folder):
 
     if mode == "playlist":
         if file_format == "MP3":
+            # Audio-only playlist
             ydl_opts = {
                 "format": "bestaudio/best",
                 "outtmpl": outtmpl,
@@ -51,22 +52,24 @@ def download_youtube(url, mode, file_format, output_folder):
                 "progress_hooks": [progress_hook],
             }
         else:  
+            # Video playlist, remux to mp4
             ydl_opts = {
                 "format": "bestvideo+bestaudio/best",
                 "outtmpl": outtmpl,
                 "ignoreerrors": True,
                 "logger": logger,
                 "progress_hooks": [progress_hook],
+                # Remux final output into mp4
                 "postprocessors": [
                     {
                         "key": "FFmpegVideoRemuxer",
-                        "when": "post_process",
-                        "preferedformat": "webm"
+                        "preferedformat": "mp4"
                     }
                 ],
             }
     else:
         if file_format == "Audio":
+            # Single audio download
             ydl_opts = {
                 "format": "bestaudio/best",
                 "outtmpl": outtmpl,
@@ -82,6 +85,7 @@ def download_youtube(url, mode, file_format, output_folder):
                 "progress_hooks": [progress_hook],
             }
         else:
+            # Single video download, remux to mp4
             ydl_opts = {
                 "format": "bestvideo+bestaudio/best",
                 "outtmpl": outtmpl,
@@ -91,8 +95,7 @@ def download_youtube(url, mode, file_format, output_folder):
                 "postprocessors": [
                     {
                         "key": "FFmpegVideoRemuxer",
-                        "when": "post_process",
-                        "preferedformat": "webm"
+                        "preferedformat": "mp4"
                     }
                 ],
             }
