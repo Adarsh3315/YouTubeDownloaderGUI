@@ -145,7 +145,7 @@ def ui_live_status():
     with st.sidebar:
         st.header("Download Status")
         st.code("\n".join(st.session_state[STATE.LOGS][-10:]))
-        st.markdown("[GitHub Repository](https://github.com/Adarsh3315/YouTubeDownloaderGUI)")
+        st.markdown("[GitHub Repository Link 📦🔗](https://github.com/Adarsh3315/YouTubeDownloaderGUI)")
 
 def ui_progress_display():
     if st.session_state[STATE.ACTIVE]:
