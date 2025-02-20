@@ -68,7 +68,7 @@ def get_base_options(file_format):
                 "preferredquality": "192",
             }]
         })
-    else:
+    else:  
         base_opts.update({
             "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
             "merge_output_format": "mp4",
@@ -81,8 +81,9 @@ def get_base_options(file_format):
 
 def progress_hook(d):
     if d["status"] == "downloading":
-        if d.get("total_bytes"):
-            percent = d["downloaded_bytes"] / d["total_bytes"] * 100
+        total = d.get("total_bytes") or d.get("total_bytes_estimate")
+        if total:
+            percent = d["downloaded_bytes"] / total * 100
             st.session_state[STATE.PROGRESS] = percent
             st.session_state[STATE.LOGS].append(f"Progress: {percent:.1f}%")
     elif d["status"] == "finished":
@@ -117,7 +118,7 @@ def start_download():
             with yt_dlp.YoutubeDL({"simulate": True}) as ydl:
                 info = ydl.extract_info(st.session_state.url, download=False)
             entries = info.get("entries", [])
-            urls = [e["webpage_url"] for e in entries if e]
+            urls = [e["webpage_url"] for e in entries if e and e.get("webpage_url")]
             st.session_state[STATE.COUNT] = len(urls)
             with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
                 futures = [executor.submit(download_item, url) for url in urls]
@@ -179,7 +180,7 @@ def main():
     st.title("YouTube Downloader GUI")
     st.caption("For educational purposes only - Respect copyright laws")
     ui_download_controls()
-    ui_live_status() 
+    ui_live_status()
     ui_progress_display()
     ui_download_results()
 
