@@ -6,7 +6,7 @@ This is a simple and user-friendly YouTube Downloader with a graphical interface
 
 > **⚠ Disclaimer:** This tool is intended for personal and educational purposes only. Downloading copyrighted content without permission may violate YouTube's Terms of Service and local copyright laws. Please use this tool responsibly.
 
-> **🌐 Online Demo:** If you just want to see a demo, please check out this link: [YouTube Downloader GUI Demo](https://youtubedownloadergui.streamlit.app/). However, due to YouTube policies, we have implemented a system to disable audio downloads within videos. But if you run the same Streamlit file on your local system, everything will work perfectly.
+> **🌐 Online Demo:** If you just want to see a demo, please check out this link: [YouTube Downloader GUI Demo](https://youtubedownloadergui.streamlit.app/). However, due to YouTube policies, we have implemented a system to disable audio downloads within videos. Furthermore, you are intelligent and already know how to merge audio and video in VLC Media Player. But if you run the same Streamlit file on your local system, everything will work perfectly.
 
 ## ✨ Features
 
