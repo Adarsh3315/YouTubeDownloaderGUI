@@ -131,13 +131,13 @@ def start_download():
 def ui_download_controls():
     col1, col2 = st.columns([1, 2])
     with col1:
-        st.session_state.url = st.text_input("YouTube URL", key="url_input")
+        st.session_state.url = st.text_input("YouTube URL :", key="url_input")
     with col2:
         st.session_state.mode = st.radio("Mode", ("Single", "Playlist"), horizontal=True, key="mode_radio")
     st.session_state.file_format = st.radio("Format", ("Video", "Audio"), horizontal=True, key="format_radio")
     if st.button("Start Download", disabled=st.session_state[STATE.ACTIVE]):
         if not st.session_state.url:
-            st.error("Please enter a URL :")
+            st.error("Please enter a URL")
         else:
             start_download()
 
@@ -179,7 +179,7 @@ def main():
     setup_session_state()
     cleanup_old_downloads()
     st.title("YouTube Downloader GUI")
-    st.caption("For educational purposes only - Respect copyright laws")
+    st.caption("For educational purposes only - Respect copyright laws.")
     ui_download_controls()
     ui_live_status()
     ui_progress_display()
